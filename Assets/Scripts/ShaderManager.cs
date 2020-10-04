@@ -15,44 +15,41 @@ public class ShaderManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TurnOffPostProcessingEffect("SineWaveEffect");
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            TurnOnPostProcessingEffect("SineWaveEffect");
-        }
-    }
-
     /// <summary>
     /// Turns on a Post Processing effect.
     /// </summary>
     /// <param name="name">Name of Post Processing Effect.</param>
+    /// <param name="effectDurration">Optional param on how long you want effect to last. By default it lasts forever.</param>
     /// <returns>True if sucessful, False if could not find effect component.</returns>
-    public bool TurnOnPostProcessingEffect(string name)
+    public bool TurnOnPostProcessingEffect(string name, float effectDurration = -1f)
     {
         foreach(VolumeComponent component in components)
         {
             if (component.name.Contains(name))
             {
                 component.active = true;
+
+                if (effectDurration > 0)
+                    StartCoroutine(AfterTimeTurnOffEffect(component, effectDurration));
+
                 return true;
             }
         }
 
         // if wasnt found return false
         return false;
+    }
+
+    /// <summary>
+    /// Turns off effect after given duration.
+    /// </summary>
+    /// <param name="component">Volume Component to turn off.</param>
+    /// <param name="effectDurration">Time for effect to last.</param>
+    /// <returns>IEnumerator</returns>
+    private IEnumerator AfterTimeTurnOffEffect(VolumeComponent component, float effectDurration)
+    {
+        yield return new WaitForSeconds(effectDurration);
+        component.active = false;
     }
 
     /// <summary>
