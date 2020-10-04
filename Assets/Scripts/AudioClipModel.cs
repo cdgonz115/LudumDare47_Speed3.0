@@ -6,19 +6,9 @@ using UnityEngine;
 public class AudioClipModel : MonoBehaviour
 {
     public AudioClip[] audioClips;
-    public static float Volume
-    {
-        get { return _volume; }
-        set
-        {
-            if (value < 0) _volume = 0;
-            else if (value > 1) _volume = 1;
-            else _volume = value;
-        }
-    }
+    public static float volume = 1;
 
     private AudioSource[] _sources;
-    private static float _volume = 1;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,17 +18,18 @@ public class AudioClipModel : MonoBehaviour
         {
             _sources[x] = gameObject.AddComponent<AudioSource>();
             _sources[x].clip = audioClips[x];
-            _sources[x].volume = Volume;
         }
     }
 
-    public void Play(string name, bool doLoop = false)
+    public void Play(string name, bool doLoop = false, int priority = 128, float pitch = 1)
     {
-        AudioSource source = Array.Find(_sources, clip => clip.name == name);
+        AudioSource source = Array.Find(_sources, s => s.clip.name.Equals(name));
         if (source)
         {
-            source.volume = Volume;
+            source.volume = volume;
             source.loop = doLoop;
+            source.priority = priority;
+            source.pitch = pitch;
             source.Play();
         }
     }
