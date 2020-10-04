@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 498923930}
   - component: {fileID: 498923929}
   m_Layer: 0
-  m_Name: Teleporter (1)
+  m_Name: Speedster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -300,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498923928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.1, y: -0.7, z: -171.9}
+  m_LocalPosition: {x: -39.2, y: 11.2, z: -171.9}
   m_LocalScale: {x: 30, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -728,8 +728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46f4a01dfe00e647bb61cdb5e11d3a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  z: 0
   walkSpeed: 5
-  runSpeed: 10
   speed: 0
   gravityRate: -18.6
   increaseRate: 0.05
@@ -741,6 +743,8 @@ MonoBehaviour:
   yVelocity: {x: 0, y: 0, z: 0}
   move: {x: 0, y: 0, z: 0}
   rb: {fileID: 993198820}
+  inBoost: 0
+  boostMultiplier: 1.0000005
   mask:
     serializedVersion: 2
     m_Bits: 512

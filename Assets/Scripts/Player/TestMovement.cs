@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class TestMovement : MonoBehaviour
 {
-    float x, y, z;
+    public float x, y, z;
     public float walkSpeed;
-    public float runSpeed;
     public float speed;
     public float gravityRate;
     public float increaseRate;
@@ -21,9 +20,16 @@ public class TestMovement : MonoBehaviour
     public Vector3 move;
     public Rigidbody rb;
 
+    public bool inBoost;
+    public float boostMultiplier;
+
     public LayerMask mask;
 
     // Update is called once per frame
+    private void Start()
+    {
+        speed = walkSpeed;
+    }
     void Update()
     {
 
@@ -38,12 +44,12 @@ public class TestMovement : MonoBehaviour
         Move();
         Jump();
 
-        //print(rb.velocity);
+        print(speed);
     }
     void Move()
     {
         //isGrounded = (Physics.Raycast(transform.position, -Vector3.up, distToGround))? true: false;
-        speed = (Input.GetKey(KeyCode.LeftShift))? runSpeed : walkSpeed;
+        //speed = (Input.GetKey(KeyCode.LeftShift))? runSpeed : walkSpeed;
         /*if (!isGrounded)
         {
             z = Input.GetAxis("Horizontal") * speed;
@@ -52,22 +58,30 @@ public class TestMovement : MonoBehaviour
         else 
         {
             */
-        if (Input.GetKey(KeyCode.W)) z = (z>=speed)?z+increaseRate:speed;
-        else if (Input.GetKey(KeyCode.S)) z= (z <= -speed)? z - increaseRate : -speed;
-        else z = 0;
+        if (Input.GetKey(KeyCode.W)) z = (z >= speed) ? z + increaseRate : speed;
+        else if (Input.GetKey(KeyCode.S)) z = (z <= -speed) ? z - increaseRate : -speed;
+        else
+        {
+            z = 0;
+            boostMultiplier = 1;
+        }
         if (Input.GetKey(KeyCode.D)) x = (x >= speed) ? x + increaseRate : speed;
         else if (Input.GetKey(KeyCode.A)) x = (x <= -speed) ? x - increaseRate : -speed;
-        else x = 0;
+        else
+        {
+            x = 0;
+            boostMultiplier = 1;
+        }
 
-        //if (Input.GetKey(KeyCode.W)) rb.velocity = transform.forward * speed;
-        //else if (Input.GetKey(KeyCode.S)) rb.velocity = transform.forward* -speed;
-        //if (Input.GetKey(KeyCode.D)) rb.velocity = transform.right * speed;
-        //else if (Input.GetKey(KeyCode.A)) rb.velocity =  transform.right * -speed;
+            //if (Input.GetKey(KeyCode.W)) rb.velocity = transform.forward * speed;
+            //else if (Input.GetKey(KeyCode.S)) rb.velocity = transform.forward* -speed;
+            //if (Input.GetKey(KeyCode.D)) rb.velocity = transform.right * speed;
+            //else if (Input.GetKey(KeyCode.A)) rb.velocity =  transform.right * -speed;
 
 
-        //}     
-        move = transform.right * x + transform.forward * z;
-        controller.Move(move*Time.deltaTime);
+            //}     
+            move = transform.right * x + transform.forward * z;
+        controller.Move(move*Time.deltaTime * boostMultiplier);
         yVelocity.y += gravityRate * Time.deltaTime;
         //else yVelocity.y = 0;
         controller.Move(yVelocity * Time.deltaTime);
