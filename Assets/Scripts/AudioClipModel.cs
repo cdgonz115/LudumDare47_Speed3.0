@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
+/// <summary>
+/// Class on individual objects that play clips for said object
+/// </summary>
 public class AudioClipModel : MonoBehaviour
 {
     public AudioClip[] audioClips;
