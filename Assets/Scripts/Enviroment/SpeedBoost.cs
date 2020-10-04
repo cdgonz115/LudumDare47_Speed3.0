@@ -11,7 +11,9 @@ public class SpeedBoost : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            print(other.gameObject.GetComponent<Rigidbody>().velocity);
             other.gameObject.GetComponent<Rigidbody>().velocity *= speedBoost;
+            print(other.gameObject.GetComponent<Rigidbody>().velocity);
         }
     }
 }

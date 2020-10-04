@@ -4,41 +4,39 @@ using UnityEngine;
 
 public class TestMovement : MonoBehaviour
 {
-    Rigidbody rb;
     float x, y, z;
-    public GameObject camera;
     public float walkSpeed;
     public float runSpeed;
     public float speed;
     public float gravityRate;
     public float increaseRate;
-
-    public float distToGround;
     public float jumpHeight;
 
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
-    public bool isGrounded; 
+    public bool isGrounded;
+    public Transform groundCheck;
+    public float groundeDistance;
 
     public CharacterController controller;
-    Vector3 yVelocity;
+    public Vector3 yVelocity;
+    public Vector3 move;
+    public Rigidbody rb;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        distToGround = GetComponent<CapsuleCollider>().bounds.center.y;
-    }
+    public LayerMask mask;
 
     // Update is called once per frame
     void Update()
     {
 
-        if(controller.isGrounded && yVelocity.y < 0)
+        if (transform.position.y < 0) print(transform.position.y);
+        //if (transform.position.y < 0) transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+
+        isGrounded = Physics.CheckSphere(groundCheck.position,groundeDistance,mask);
+        if (isGrounded && yVelocity.y < 0)
         {
-            yVelocity.y = -2f;
+            yVelocity.y = 0f;
         }
         Move();
-       Jump();
+        Jump();
 
         //print(rb.velocity);
     }
@@ -68,18 +66,23 @@ public class TestMovement : MonoBehaviour
 
 
         //}     
-        Vector3 move = transform.right * x + transform.forward * z;
+        move = transform.right * x + transform.forward * z;
         controller.Move(move*Time.deltaTime);
         yVelocity.y += gravityRate * Time.deltaTime;
+        //else yVelocity.y = 0;
         controller.Move(yVelocity * Time.deltaTime);
         //print(rb.velocity);/
     }
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded) yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityRate);
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) yVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravityRate);
     }
     void ApplyGravity()
     { 
         //if(isGrounded)
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, groundeDistance);
     }
 }
