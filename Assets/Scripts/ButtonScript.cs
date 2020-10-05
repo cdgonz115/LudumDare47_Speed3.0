@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private AudioManager audioSource;
+    public Button button;
+
+    void Awake()
     {
-        
+        audioSource = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioManager>();
+
+        button.onClick.AddListener(delegate { playClip(audioSource); } );
     }
 
-    // Update is called once per frame
-    void Update()
+    public void playClip(AudioManager audioSource)
     {
-        
+        audioSource.manualVolumeSources[1].Play();
     }
 }
