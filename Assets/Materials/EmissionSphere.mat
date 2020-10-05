@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: EmissionSphere
-  m_Shader: {fileID: -6465566751694194690, guid: f009f2bba996d9a4cacdd381bd5aa549, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5bdc2e4a0a5c43349b153e21259d01aa, type: 3}
   m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -110,6 +110,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - ColorChangePercent: 0
     - Vector1_42082F4F: 3
     - Vector1_84088C73: 100
     - Vector1_A1AA487F: 2
