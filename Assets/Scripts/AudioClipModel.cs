@@ -10,12 +10,14 @@ using UnityEngine;
 public class AudioClipModel : MonoBehaviour
 {
     public AudioClip[] audioClips;
-    public static float volume = 1;
+    public static float volume = 1.0f;
 
     private AudioSource[] _sources;
     // Start is called before the first frame update
     void Awake()
     {
+        volume = gameObject.GetComponent<AudioSource>().volume;
+
         _sources = new AudioSource[audioClips.Length];
 
         for (int x = 0; x < _sources.Length; x++)
