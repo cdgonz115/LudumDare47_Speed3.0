@@ -295,11 +295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ab3d377e0f4e41a07950add205f57, type: 3}
   m_Name: SineWaveEffect
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
-    m_OverrideState: 0
-    m_Value: 10
+    m_OverrideState: 1
+    m_Value: 21.6
     min: 0
     max: 100
 --- !u!114 &8711377374188185572
