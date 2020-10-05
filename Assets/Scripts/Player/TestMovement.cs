@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TestMovement : MonoBehaviour
 {
@@ -56,6 +57,11 @@ public class TestMovement : MonoBehaviour
             }
             stop = true;
         } 
+
+        if(hit.gameObject.tag == "Win")
+        {
+            SceneManager.LoadScene(0);
+        }
     }
     void Move()
     {

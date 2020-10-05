@@ -9,12 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: ed89abf00dc09a7489a6c6f57ff55cff
   - enabled: 1
-    path: Assets/Scenes/testPauseMenu.unity
-    guid: 8b92a46b56459d245b74b2cf9f0bfb0f
-  - enabled: 1
     path: Assets/Scenes/TestMovement.unity
     guid: 786e12017303c4247bedabab65079eca
-  - enabled: 1
-    path: Assets/Scenes/samplescene.unity
-    guid: cbfe36cfddfde964d9dfce63a355d5dd
   m_configObjects: {}
