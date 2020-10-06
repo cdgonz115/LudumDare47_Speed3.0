@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
+    public GameObject startPos;
+
     private void Start()
     {
         gameIsPaused = false;
@@ -47,6 +49,15 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameIsPaused = true;
+    }
+
+    public void TPtoStart()
+    { 
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<CharacterController>().enabled = false;
+        player.transform.position = startPos.transform.position;
+        player.GetComponent<CharacterController>().enabled = true;
+        Resume();
     }
 
     public void Restart()

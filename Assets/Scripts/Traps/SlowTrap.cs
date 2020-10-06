@@ -4,14 +4,36 @@ using UnityEngine;
 
 public class SlowTrap : MonoBehaviour
 {
-    [SerializeField]
-    private float SlowDown = 0.8f;
+    private float slowDown = 0.5f;
+    private GameObject player;
+
+    private float timer = 5;
+    bool hitTrap = false;
+
+    private void Update()
+    {
+        if(hitTrap)
+        {
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime;
+            }
+            else
+            {
+                player.GetComponent<TestMovement>().boostMultiplier = 1;
+                hitTrap = false;
+                timer = 5;
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<Rigidbody>().velocity *= SlowDown;
+            hitTrap = true;
+            player = other.gameObject;
+            other.gameObject.GetComponent<TestMovement>().boostMultiplier *= slowDown;
         }
     }
 }

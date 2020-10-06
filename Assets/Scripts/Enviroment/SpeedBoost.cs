@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-    [SerializeField]
-    private float speedBoost = 2.0f;
+    private float speedBoost = 1.1f;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<TestMovement>().boostMultiplier *= speedBoost;
         }
     }
-
 }

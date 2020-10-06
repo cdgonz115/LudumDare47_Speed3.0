@@ -58,11 +58,16 @@ public class TestMovement : MonoBehaviour
             stop = true;
         } 
 
-        if(hit.gameObject.tag == "Win")
+        switch(hit.gameObject.tag)
         {
-            SceneManager.LoadScene(0);
+            case "Win":
+                SceneManager.LoadScene(0);
+                break;
+            default:
+                break;
         }
     }
+
     void Move()
     {
         //isGrounded = (Physics.Raycast(transform.position, -Vector3.up, distToGround))? true: false;
@@ -111,7 +116,7 @@ public class TestMovement : MonoBehaviour
             //}     
         move = transform.right * x + transform.forward * z;
         controller.Move(move*Time.deltaTime * boostMultiplier);
-        velocity += Mathf.Abs( ( (transform.right* (x == 0 ? 0 : 1) + transform.forward* (z == 0 ? 0 : 1))* increaseRate).magnitude )  ;
+        velocity += boostMultiplier * Mathf.Abs( ( (transform.right* (x == 0 ? 0 : 1) + transform.forward* (z == 0 ? 0 : 1))* increaseRate).magnitude )  ;
         yVelocity.y += gravityRate * Time.deltaTime;
         //else yVelocity.y = 0;
         controller.Move(yVelocity * Time.deltaTime);
